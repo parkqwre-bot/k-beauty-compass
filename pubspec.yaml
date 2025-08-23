@@ -1,0 +1,32 @@
+name: k_beauty_compass
+description: A new Flutter project for K-Beauty recommendations.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter         # Add this line
+  intl: ^0.20.2            # Add this line
+  url_launcher: ^6.1.5 # To open web links
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  generate: true # Add this line
+  uses-material-design: true
+
+  assets:
+    - assets/product_database.json
