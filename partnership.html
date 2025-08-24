@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner with K-Beauty Compass</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #fce4ec; /* Light Pink */
+            --secondary-color: #e91e63; /* Strong Pink */
+            --text-color: #333;
+            --bg-color: #fff;
+            --surface-color: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .lang-switcher button {
+            background: none;
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .lang-switcher button.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background-color: var(--primary-color);
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #d81b60;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .feature-item i {
+            font-size: 3em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            background-color: var(--primary-color);
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-button:hover {
+            background-color: #d81b60;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--surface-color);
+            margin-top: 40px;
+        }
+        
+        /* For hiding/showing content */
+        [lang="ko"] { display: none; }
+
+    </style>
+    <!-- Adding simple icons from a CDN for visual flair -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header class="container">
+        <div class="logo">
+            <i class="far fa-compass"></i> K-Beauty Compass
+        </div>
+        <nav class="lang-switcher">
+            <button id="lang-en" class="active">English</button>
+            <button id="lang-ko">한국어</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="en">
+                <h1>Partner with K-Beauty Compass</h1>
+                <p>Connect your brand with a global audience of passionate K-Beauty enthusiasts.</p>
+                <a href="#contact-form" class="cta-button">Become a Partner Today</a>
+            </div>
+            <div class="ko">
+                <h1>뷰티 나침반과 함께 하세요</h1>
+                <p>열정적인 K-뷰티 팬들로 이루어진 글로벌 사용자들과 당신의 브랜드를 연결하세요.</p>
+                <a href="#contact-form" class="cta-button">지금 파트너가 되어보세요</a>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="en">
+                <h2>Why Partner With Us?</h2>
+            </div>
+            <div class="ko">
+                <h2>왜 뷰티 나침반과 함께해야 할까요?</h2>
+            </div>
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3 class="en">Reach a Global Audience</h3>
+                    <h3 class="ko">글로벌 사용자</h3>
+                    <p class="en">Our app connects K-Beauty lovers from all over the world, providing a direct channel to your target customers.</p>
+                    <p class="ko">저희 앱은 전 세계의 K-뷰티 팬들을 연결하여, 브랜드의 핵심 고객에게 직접 다가갈 수 있는 채널을 제공합니다.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bullseye"></i>
+                    <h3 class="en">Data-Driven Recommendations</h3>
+                    <h3 class="ko">데이터 기반 추천</h3>
+                    <p class="en">We match products to users based on a detailed skin quiz, ensuring your products reach the most relevant audience.</p>
+                    <p class="ko">상세한 피부 타입 퀴즈를 통해 사용자와 제품을 매칭하여, 가장 관련성 높은 고객에게 제품이 노출됩니다.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-handshake"></i>
+                    <h3 class="en">A True Partnership</h3>
+                    <h3 class="ko">진정한 파트너십</h3>
+                    <p class="en">We believe in growing together. We offer flexible partnership models to suit your brand's goals.</p>
+                    <p class="ko">저희는 동반 성장을 믿습니다. 브랜드의 목표에 맞는 유연한 파트너십 모델을 제공합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section" id="contact-form">
+            <div class="container">
+                <div class="en">
+                    <h2>Let's Get in Touch</h2>
+                    <p style="text-align: center; max-width: 600px; margin: 0 auto 40px;">Fill out the form below to start the conversation. We're excited to hear from you!</p>
+                </div>
+                <div class="ko">
+                    <h2>제휴 문의하기</h2>
+                    <p style="text-align: center; max-width: 600px; margin: 0 auto 40px;">아래 양식을 작성하여 파트너십에 대한 대화를 시작해보세요. 여러분의 연락을 기다립니다!</p>
+                </div>
+                
+                <form onsubmit="alert('Thank you for your interest! We will get back to you soon. (This is a demo form)'); return false;">
+                    <div class="form-group">
+                        <label for="company-name" class="en">Company Name</label>
+                        <label for="company-name" class="ko">회사명</label>
+                        <input type="text" id="company-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email" class="en">Contact Email</label>
+                        <label for="contact-email" class="ko">담당자 이메일</label>
+                        <input type="email" id="contact-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="website" class="en">Brand Website / URL</label>
+                        <label for="website" class="ko">브랜드 웹사이트 / URL</label>
+                        <input type="url" id="website" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="en">Message</label>
+                        <label for="message" class="ko">메시지</label>
+                        <textarea id="message" placeholder-en="Tell us about your brand and why you'd like to partner with us..." placeholder-ko="당신의 브랜드에 대해, 그리고 저희와 파트너가 되고 싶은 이유에 대해 알려주세요..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button en">Submit Inquiry</button>
+                    <button type="submit" class="submit-button ko">문의 제출하기</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 K-Beauty Compass. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const langEnBtn = document.getElementById('lang-en');
+        const langKoBtn = document.getElementById('lang-ko');
+        const enElements = document.querySelectorAll('.en');
+        const koElements = document.querySelectorAll('.ko');
+        const messageTextarea = document.getElementById('message');
+
+        function setLanguage(lang) {
+            if (lang === 'ko') {
+                langEnBtn.classList.remove('active');
+                langKoBtn.classList.add('active');
+                enElements.forEach(el => el.style.display = 'none');
+                koElements.forEach(el => el.style.display = 'block');
+                messageTextarea.placeholder = messageTextarea.getAttribute('placeholder-ko');
+                document.documentElement.lang = 'ko';
+            } else {
+                langKoBtn.classList.remove('active');
+                langEnBtn.classList.add('active');
+                koElements.forEach(el => el.style.display = 'none');
+                enElements.forEach(el => el.style.display = 'block');
+                messageTextarea.placeholder = messageTextarea.getAttribute('placeholder-en');
+                document.documentElement.lang = 'en';
+            }
+        }
+
+        langEnBtn.addEventListener('click', () => setLanguage('en'));
+        langKoBtn.addEventListener('click', () => setLanguage('ko'));
+
+        // Initialize with English
+        setLanguage('en');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Low pH Good Morning Gel Cleanser",
+    "brand": "COSRX",
+    "tags": ["all", "oily"],
+    "imageUrl": "https://picsum.photos/seed/cleanser1/200/200",
+    "affiliateUrl": "https://www.stylekorean.com/shop/cosrx-low-ph-good-morning-gel-cleanser-150ml/1450633401/"
+  },
+  {
+    "id": 2,
+    "name": "Jeju Volcanic Pore Cleansing Foam",
+    "brand": "Innisfree",
+    "tags": ["oily"],
+    "imageUrl": "https://picsum.photos/seed/cleanser2/200/200",
+    "affiliateUrl": "https://www.stylekorean.com/shop/innisfree-jeju-volcanic-pore-cleansing-foam-ex-150ml/1585896936/"
+  },
+  {
+    "id": 3,
+    "name": "AHA BHA PHA 30 Days Miracle Serum",
+    "brand": "Some By Mi",
+    "tags": ["serum", "acne"],
+    "imageUrl": "https://picsum.photos/seed/serum1/200/200",
+    "affiliateUrl": "https://www.stylekorean.com/shop/some-by-mi-aha-bha-pha-30-days-miracle-serum-50ml/1534816393/"
+  },
+  {
+    "id": 4,
+    "name": "Time Revolution Night Repair Ampoule 5X",
+    "brand": "Missha",
+    "tags": ["serum", "wrinkles"],
+    "imageUrl": "https://picsum.photos/seed/serum2/200/200",
+    "affiliateUrl": "https://www.stylekorean.com/shop/missha-time-revolution-night-repair-ampoule-5x-50ml/1628754911/"
+  },
+  {
+    "id": 5,
+    "name": "The True Cream - Moisturizing Bomb",
+    "brand": "Belif",
+    "tags": ["cream", "dry"],
+    "imageUrl": "https://picsum.photos/seed/cream1/200/200",
+    "affiliateUrl": "https://www.stylekorean.com/shop/belif-the-true-cream-moisturizing-bomb-50ml/1450850923/"
+  },
+  {
+    "id": 6,
+    "name": "Intensive Hydrating Cream with Green Tea Seed",
+    "brand": "Innisfree",
+    "tags": ["cream", "all"],
+    "imageUrl": "https://picsum.photos/seed/cream2/200/200",
+    "affiliateUrl": "https://www.stylekorean.com/shop/innisfree-intensive-hydrating-cream-with-green-tea-seed-50ml/1553579833/"
+  }
+]
