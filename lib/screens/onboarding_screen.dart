@@ -105,8 +105,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               (index) => _buildDot(index, context),
             ),
           ),
-          // Start Button on the last page
+          // Next or Start Button
           if (_currentPage == onboardingData.length - 1)
+            // Show "Get Started" button on the last page
             ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const QuizScreen()));
@@ -124,8 +125,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             )
           else
-            // Empty space to keep the dots centered
-            const SizedBox(width: 120), 
+            // Show "Next" button on other pages
+            TextButton(
+              onPressed: () {
+                _pageController.nextPage(
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: Text(
+                "다음", // TODO: Localize this string
+                style: TextStyle(color: Colors.pink.shade300, fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ), 
         ],
       ),
     );
