@@ -40,5 +40,13 @@
   "moreThan10Minutes": "More than 10 minutes",
   "whichCountryDoYouResideIn": "Which country do you reside in?",
   "previous": "Previous",
-  "finish": "Finish"
+  "finish": "Finish",
+  "personalColor": "Which color palette suits you best? (Personal Color)",
+  "warmTone": "Warm Tone (Orange, Brown colors)",
+  "coolTone": "Cool Tone (Pink, Blue colors)",
+  "notSure": "Not Sure",
+  "areYouSensitiveToSpecifics": "Are you sensitive to specific ingredients (e.g., fragrance, alcohol)?",
+  "verySensitive": "Yes, very sensitive",
+  "somewhatSensitive": "Somewhat sensitive",
+  "notSensitive": "No, not at all"
 }

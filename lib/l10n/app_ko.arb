@@ -40,5 +40,13 @@
   "moreThan10Minutes": "10분 이상",
   "whichCountryDoYouResideIn": "어느 국가에 거주하고 계신가요?",
   "previous": "이전",
-  "finish": "완료"
+  "finish": "완료",
+  "personalColor": "가장 잘 어울리는 색상 계열은 무엇인가요? (퍼스널 컬러)",
+  "warmTone": "웜톤 (오렌지, 브라운 계열)",
+  "coolTone": "쿨톤 (핑크, 블루 계열)",
+  "notSure": "잘 모르겠음",
+  "areYouSensitiveToSpecifics": "특정 성분(향료, 알코올 등)에 민감한 편인가요?",
+  "verySensitive": "네, 아주 민감해요",
+  "somewhatSensitive": "조금 민감한 편이에요",
+  "notSensitive": "아니요, 전혀 민감하지 않아요"
 }
