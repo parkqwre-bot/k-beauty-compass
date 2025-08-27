@@ -143,4 +143,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get finish => 'Finish';
+
+  @override
+  String get personalColor =>
+      'Which color palette suits you best? (Personal Color)';
+
+  @override
+  String get warmTone => 'Warm Tone (Orange, Brown colors)';
+
+  @override
+  String get coolTone => 'Cool Tone (Pink, Blue colors)';
+
+  @override
+  String get notSure => 'Not Sure';
+
+  @override
+  String get areYouSensitiveToSpecifics =>
+      'Are you sensitive to specific ingredients (e.g., fragrance, alcohol)?';
+
+  @override
+  String get verySensitive => 'Yes, very sensitive';
+
+  @override
+  String get somewhatSensitive => 'Somewhat sensitive';
+
+  @override
+  String get notSensitive => 'No, not at all';
 }

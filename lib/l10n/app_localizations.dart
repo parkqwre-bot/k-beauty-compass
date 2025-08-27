@@ -349,6 +349,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Finish'**
   String get finish;
+
+  /// No description provided for @personalColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Which color palette suits you best? (Personal Color)'**
+  String get personalColor;
+
+  /// No description provided for @warmTone.
+  ///
+  /// In en, this message translates to:
+  /// **'Warm Tone (Orange, Brown colors)'**
+  String get warmTone;
+
+  /// No description provided for @coolTone.
+  ///
+  /// In en, this message translates to:
+  /// **'Cool Tone (Pink, Blue colors)'**
+  String get coolTone;
+
+  /// No description provided for @notSure.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Sure'**
+  String get notSure;
+
+  /// No description provided for @areYouSensitiveToSpecifics.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sensitive to specific ingredients (e.g., fragrance, alcohol)?'**
+  String get areYouSensitiveToSpecifics;
+
+  /// No description provided for @verySensitive.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, very sensitive'**
+  String get verySensitive;
+
+  /// No description provided for @somewhatSensitive.
+  ///
+  /// In en, this message translates to:
+  /// **'Somewhat sensitive'**
+  String get somewhatSensitive;
+
+  /// No description provided for @notSensitive.
+  ///
+  /// In en, this message translates to:
+  /// **'No, not at all'**
+  String get notSensitive;
 }
 
 class _AppLocalizationsDelegate

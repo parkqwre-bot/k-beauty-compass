@@ -134,4 +134,28 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get finish => '완료';
+
+  @override
+  String get personalColor => '가장 잘 어울리는 색상 계열은 무엇인가요? (퍼스널 컬러)';
+
+  @override
+  String get warmTone => '웜톤 (오렌지, 브라운 계열)';
+
+  @override
+  String get coolTone => '쿨톤 (핑크, 블루 계열)';
+
+  @override
+  String get notSure => '잘 모르겠음';
+
+  @override
+  String get areYouSensitiveToSpecifics => '특정 성분(향료, 알코올 등)에 민감한 편인가요?';
+
+  @override
+  String get verySensitive => '네, 아주 민감해요';
+
+  @override
+  String get somewhatSensitive => '조금 민감한 편이에요';
+
+  @override
+  String get notSensitive => '아니요, 전혀 민감하지 않아요';
 }
