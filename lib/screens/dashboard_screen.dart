@@ -17,11 +17,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bool _isLoading = true;
   late List<Product> _recommendedProducts;
   final RecommendationService _recommendationService = RecommendationService();
+  late PageController _pageController; // Controller declared here
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(viewportFraction: 0.85); // Initialized here
     _initializeRecommendations();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose(); // Disposed here
+    super.dispose();
   }
 
   Future<void> _initializeRecommendations() async {
@@ -110,9 +118,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         SliverToBoxAdapter(
           child: SizedBox(
-            height: 450, // Give the PageView a fixed height
+            height: 450,
             child: PageView.builder(
-              controller: PageController(viewportFraction: 0.85), // Show parts of next/prev cards
+              controller: _pageController, // Use the stateful controller
               itemCount: _recommendedProducts.length,
               itemBuilder: (context, index) {
                 final product = _recommendedProducts[index];
