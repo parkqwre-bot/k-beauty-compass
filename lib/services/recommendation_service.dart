@@ -3,45 +3,63 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../models/product_model.dart';
 
 class RecommendationService {
-  Future<List<Product>> _loadProductDatabase() async {
+
+  // This function now returns a List of Products, not a Map.
+  Future<List<Product>> getRecommendations(Map<int, List<int>> answers) async {
+    // 1. Load and decode the JSON
     final String jsonString = await rootBundle.loadString('assets/product_database.json');
-    final List<dynamic> jsonList = json.decode(jsonString);
-    return jsonList.map((json) => Product.fromJson(json)).toList();
-  }
+    final Map<String, dynamic> allData = json.decode(jsonString);
+    final Map<String, dynamic> skinTypesData = allData['skin_types'];
 
-  Future<Map<String, Product>> getRecommendations(Map<int, List<int>> answers) async {
-    final List<Product> allProducts = await _loadProductDatabase();
-    Map<String, Product> recommendedRoutine = {};
+    // 2. Determine the user's primary concern from the quiz answers
+    String concernKey = 'dry'; // Default key
 
-    // Default products
-    Product cleanser = allProducts.firstWhere((p) => p.tags.contains("all") && p.name.contains("Cleanser"), orElse: () => allProducts.first);
-    Product serum = allProducts.firstWhere((p) => p.tags.contains("all") && p.tags.contains("serum"), orElse: () => allProducts.first);
-    Product cream = allProducts.firstWhere((p) => p.tags.contains("all") && p.tags.contains("cream"), orElse: () => allProducts.first);
-
-    // Logic for Question 1: Skin Type
-    if (answers.containsKey(0)) {
-      int skinTypeAnswer = answers[0]![0];
-      if (skinTypeAnswer == 0) { // Dry
-        cream = allProducts.firstWhere((p) => p.tags.contains("dry"), orElse: () => cream);
-      } else if (skinTypeAnswer == 2) { // Oily
-        cleanser = allProducts.firstWhere((p) => p.tags.contains("oily"), orElse: () => cleanser);
+    // Prioritize the "Biggest Skin Worries" question (index 2)
+    if (answers.containsKey(2) && answers[2]!.isNotEmpty) {
+      int concernAnswer = answers[2]![0]; // Use the first selected concern
+      switch (concernAnswer) {
+        case 0: // 여드름/뾰루지 (Acne/Blemishes)
+          concernKey = 'acne';
+          break;
+        case 1: // 모공 (Pores)
+          concernKey = 'pore';
+          break;
+        case 2: // 주름 (Wrinkles)
+          concernKey = 'antiaging';
+          break;
+        case 3: // 홍조 (Redness)
+          concernKey = 'sensitive';
+          break;
+        case 4: // 칙칙함 (Dullness)
+          concernKey = 'antiaging';
+          break;
       }
     }
-
-    // Logic for Question 2: Skin Concerns
-    if (answers.containsKey(1)) {
-      List<int> concerns = answers[1]!;
-      if (concerns.contains(2)) { // Wrinkles
-        serum = allProducts.firstWhere((p) => p.tags.contains("wrinkles"), orElse: () => serum);
-      } else if (concerns.contains(0)) { // Acne
-        serum = allProducts.firstWhere((p) => p.tags.contains("acne"), orElse: () => serum);
-      }
+    // Fallback to the "Skin Feel" question (index 1) if no primary concern is selected
+    else if (answers.containsKey(1) && answers[1]!.isNotEmpty) {
+        int skinFeelAnswer = answers[1]![0];
+        if (skinFeelAnswer == 0) { // 건조하고 당김 (Tight and Dry)
+            concernKey = 'dry';
+        } else if (skinFeelAnswer == 2) { // 번들거리고 유분기 있음 (Shiny and Oily)
+            concernKey = 'acne';
+        }
     }
 
-    recommendedRoutine["Cleanser"] = cleanser;
-    recommendedRoutine["Serum"] = serum;
-    recommendedRoutine["Cream"] = cream;
+    // 3. Determine the country for store selection from question index 0
+    String storeKey = 'coupang'; // Default to Coupang
+    if (answers.containsKey(0) && answers[0]!.isNotEmpty && answers[0]![0] == 1) { // 1 is United States
+      storeKey = 'amazon';
+    }
 
-    return recommendedRoutine;
+    // 4. Retrieve the list of product maps
+    final List<dynamic> recommendedProductsList = skinTypesData[concernKey]?[storeKey] ?? [];
+
+    // 5. Map the list of maps to a List<Product>
+    if (recommendedProductsList.isNotEmpty) {
+      return recommendedProductsList.map((json) => Product.fromJson(json)).toList();
+    } else {
+      // Return an empty list if no products are found for the given criteria
+      return [];
+    }
   }
 }

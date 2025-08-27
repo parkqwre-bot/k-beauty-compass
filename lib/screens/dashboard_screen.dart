@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:k_beauty_compass/l10n/app_localizations.dart';
-import 'package:k_beauty_compass/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/product_model.dart';
 import '../services/recommendation_service.dart';
@@ -16,7 +15,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   bool _isLoading = true;
-  late Map<String, Product> _recommendedRoutine;
+  late List<Product> _recommendedProducts;
   final RecommendationService _recommendationService = RecommendationService();
 
   @override
@@ -26,7 +25,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> _initializeRecommendations() async {
-    _recommendedRoutine = await _recommendationService.getRecommendations(widget.quizAnswers);
+    _recommendedProducts = await _recommendationService.getRecommendations(widget.quizAnswers);
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         setState(() {
@@ -56,7 +55,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: _isLoading ? _buildLoadingScreen() : _buildDashboardScreen(),
+      body: _isLoading ? _buildLoadingScreen() : _buildDashboardContent(),
     );
   }
 
@@ -76,7 +75,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildDashboardScreen() {
+  Widget _buildDashboardContent() {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -91,11 +90,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             background: Container(color: Colors.white),
           ),
-          actions: [],
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -103,19 +101,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   AppLocalizations.of(context)!.yourPersonalizedRoutine,
                   style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
+                if (_recommendedProducts.isEmpty)
+                  const Text("아쉽지만, 현재 조건에 맞는 추천 제품이 없습니다. 퀴즈를 다시 시도해보세요."),
               ],
             ),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final routineStep = _recommendedRoutine.keys.elementAt(index);
-              final product = _recommendedRoutine.values.elementAt(index);
-              return ProductCard(routineStep: routineStep, product: product);
-            },
-            childCount: _recommendedRoutine.length,
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 450, // Give the PageView a fixed height
+            child: PageView.builder(
+              controller: PageController(viewportFraction: 0.85), // Show parts of next/prev cards
+              itemCount: _recommendedProducts.length,
+              itemBuilder: (context, index) {
+                final product = _recommendedProducts[index];
+                return ProductCard(product: product);
+              },
+            ),
           ),
         ),
         SliverToBoxAdapter(
@@ -136,74 +139,94 @@ class _DashboardScreenState extends State<DashboardScreen> {
 }
 
 class ProductCard extends StatelessWidget {
-  final String routineStep;
   final Product product;
 
-  const ProductCard({super.key, required this.routineStep, required this.product});
+  const ProductCard({super.key, required this.product});
 
   Future<void> _launchUrl() async {
-    final Uri url = Uri.parse(product.affiliateUrl);
-    if (!await launchUrl(url)) {
-      print("Could not launch $url");
+    if (product.affiliateUrl.isNotEmpty) {
+      final Uri url = Uri.parse(product.affiliateUrl);
+      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+        print("Could not launch $url");
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      elevation: 2,
-      shadowColor: Colors.grey.shade50,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: InkWell(
-        onTap: _launchUrl,
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 80,
-                height: 80,
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      elevation: 4,
+      shadowColor: Colors.grey.shade200,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 5,
+              child: Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    product.imageUrl,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return const Center(child: CircularProgressIndicator());
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey.shade200,
-                        child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 40),
-                      );
-                    },
+                  child: product.imageUrl.isNotEmpty
+                      ? Image.network(
+                          product.imageUrl,
+                          fit: BoxFit.contain,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return const Center(child: CircularProgressIndicator());
+                          },
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey.shade200,
+                              child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 50),
+                            );
+                          },
+                        )
+                      : Container(
+                          color: Colors.grey.shade200,
+                          child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 50),
+                        ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              product.name,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 8),
+            Expanded(
+              flex: 3,
+              child: SingleChildScrollView(
+                child: Text(
+                  product.recommendation,
+                  style: const TextStyle(fontSize: 14, color: Colors.black54),
+                ),
+              ),
+            ),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: product.affiliateUrl.isNotEmpty ? _launchUrl : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.pink.shade300,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      routineStep.toUpperCase(),
-                      style: const TextStyle(fontSize: 12, color: Colors.pink, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      product.name,
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(product.brand, style: const TextStyle(fontSize: 14, color: Colors.black54)),
-                  ],
+                child: const Text(
+                  "보러 가기", // TODO: Localize this string
+                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
