@@ -94,7 +94,7 @@ class RecommendationService {
         }
       }
 
-      return skinTypeMatch && concernMatch;
+      return skinTypeMatch || concernMatch;
     }).toList();
 
     if (kDebugMode) {
