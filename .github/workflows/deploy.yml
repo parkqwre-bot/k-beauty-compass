@@ -27,7 +27,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter Web
-        run: flutter build web --release --base-href /k-beauty-compass/
+        run: flutter build web --release --base-href /k_beauty_compass_new/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
