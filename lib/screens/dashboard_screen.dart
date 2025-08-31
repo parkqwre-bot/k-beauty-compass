@@ -17,6 +17,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bool _isLoading = true;
   late List<Product> _recommendedProducts;
   final RecommendationService _recommendationService = RecommendationService();
+  String? _errorMessage;
   late PageController _pageController; // Controller declared here
 
   @override
@@ -33,14 +34,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> _initializeRecommendations() async {
-    _recommendedProducts = await _recommendationService.getRecommendations(widget.quizAnswers);
-    Future.delayed(const Duration(seconds: 2), () {
+    try {
+      _recommendedProducts = await _recommendationService.getRecommendations(widget.quizAnswers);
+    } catch (e) {
       if (mounted) {
         setState(() {
-          _isLoading = false;
+          _errorMessage = '추천 제품을 불러오는 데 실패했습니다: ${e.toString()}';
         });
       }
-    });
+    } finally {
+      Future.delayed(const Duration(seconds: 1), () {
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
+      });
+    }
   }
 
   void _showLegalDisclaimer(BuildContext context) {
@@ -84,6 +94,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildDashboardContent() {
+    if (_errorMessage != null) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            _errorMessage!,
+            style: const TextStyle(color: Colors.red, fontSize: 16),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+
     return CustomScrollView(
       slivers: [
         SliverAppBar(
