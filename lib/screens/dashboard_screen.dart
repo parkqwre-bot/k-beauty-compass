@@ -18,28 +18,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late List<Product> _recommendedProducts;
   final RecommendationService _recommendationService = RecommendationService();
   String? _errorMessage;
-  late PageController _pageController; // Controller declared here
+  late PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.85); // Initialized here
+    _pageController = PageController(viewportFraction: 0.85);
     _initializeRecommendations();
   }
 
   @override
   void dispose() {
-    _pageController.dispose(); // Disposed here
+    _pageController.dispose();
     super.dispose();
   }
 
   Future<void> _initializeRecommendations() async {
     try {
-      _recommendedProducts = await _recommendationService.getRecommendations(widget.quizAnswers);
-    } catch (e) {
+      _recommendedProducts =
+          await _recommendationService.getRecommendations(widget.quizAnswers);
+    } catch (e, stacktrace) {
+      print('Error loading recommendations: $e');
+      print(stacktrace);
       if (mounted) {
         setState(() {
-          _errorMessage = '추천 제품을 불러오는 데 실패했습니다: ${e.toString()}';
+          _errorMessage = '추천 제품을 불러오는 데 실패했습니다. 다시 시도해주세요.';
         });
       }
     } finally {
@@ -107,6 +110,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       );
     }
 
+    final bool isUS = widget.quizAnswers[0]?.first == 1;
+
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -114,10 +119,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
           pinned: true,
           expandedHeight: 120.0,
           flexibleSpace: FlexibleSpaceBar(
-            titlePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            titlePadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             title: Text(
               AppLocalizations.of(context)!.todaysBeautyCompass,
-              style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              style:
+                  const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
             ),
             background: Container(color: Colors.white),
           ),
@@ -149,7 +156,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   itemCount: _recommendedProducts.length,
                   itemBuilder: (context, index) {
                     final product = _recommendedProducts[index];
-                    return ProductCard(product: product);
+                    return ProductCard(product: product, isUS: isUS);
                   },
                 ),
               ),
@@ -188,7 +195,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onPressed: () => _showLegalDisclaimer(context),
               child: Text(
                 AppLocalizations.of(context)!.legalDisclaimer,
-                style: const TextStyle(color: Colors.grey, fontSize: 12, decoration: TextDecoration.underline),
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                    decoration: TextDecoration.underline),
               ),
             ),
           ),
@@ -200,12 +210,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
 class ProductCard extends StatelessWidget {
   final Product product;
+  final bool isUS;
 
-  const ProductCard({super.key, required this.product});
+  const ProductCard({super.key, required this.product, required this.isUS});
+
+  String get affiliateUrl {
+    // NOTE: Returns Coupang URL if the user is not in the US or if the Amazon URL is empty.
+    // This can be refined once Amazon links are provided.
+    if (isUS && product.affiliateUrlAmazon.isNotEmpty) {
+      return product.affiliateUrlAmazon;
+    }
+    return product.affiliateUrlCoupang;
+  }
 
   Future<void> _launchUrl() async {
-    if (product.affiliateUrl.isNotEmpty) {
-      final Uri url = Uri.parse(product.affiliateUrl);
+    if (affiliateUrl.isNotEmpty) {
+      final Uri url = Uri.parse(affiliateUrl);
       if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
         print("Could not launch $url");
       }
@@ -240,13 +260,15 @@ class ProductCard extends StatelessWidget {
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
                               color: Colors.grey.shade200,
-                              child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 50),
+                              child: const Icon(Icons.image_not_supported,
+                                  color: Colors.grey, size: 50),
                             );
                           },
                         )
                       : Container(
                           color: Colors.grey.shade200,
-                          child: const Icon(Icons.image_not_supported, color: Colors.grey, size: 50),
+                          child: const Icon(Icons.image_not_supported,
+                              color: Colors.grey, size: 50),
                         ),
                 ),
               ),
@@ -272,7 +294,7 @@ class ProductCard extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: product.affiliateUrl.isNotEmpty ? _launchUrl : null,
+                onPressed: affiliateUrl.isNotEmpty ? _launchUrl : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.pink.shade300,
                   padding: const EdgeInsets.symmetric(vertical: 12),
@@ -282,7 +304,10 @@ class ProductCard extends StatelessWidget {
                 ),
                 child: const Text(
                   "보러 가기", // TODO: Localize this string
-                  style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
