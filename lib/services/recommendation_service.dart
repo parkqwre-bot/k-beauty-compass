@@ -4,69 +4,104 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../models/product_model.dart';
 
 class RecommendationService {
-
   Future<List<Product>> getRecommendations(Map<int, List<int>> answers) async {
     if (kDebugMode) {
-      print("--- Recommendation Service Start ---");
+      print("--- New Recommendation Service Start ---");
       print("Received answers: $answers");
     }
 
     final String jsonString = await rootBundle.loadString('assets/product_database.json');
-    final Map<String, dynamic> allData = json.decode(jsonString);
-    final Map<String, dynamic> skinTypesData = allData['skin_types'];
+    final Map<String, dynamic> data = json.decode(jsonString);
+    final List<dynamic> allProductsJson = data['products'];
+    final List<Product> allProducts =
+        allProductsJson.map((p) => Product.fromJson(p)).toList();
 
-    String concernKey = 'dry'; // Default key
+    // --- Determine User's Profile from Answers ---
+    // Question 2: Skin Feel -> skin_type
+    String? userSkinType;
+    final skinFeelAnswer = answers[1]?.first;
+    if (skinFeelAnswer != null) {
+      if (skinFeelAnswer == 0) userSkinType = 'dry';
+      if (skinFeelAnswer == 1) userSkinType = 'normal';
+      if (skinFeelAnswer == 2) userSkinType = 'oily';
+    }
 
-    if (answers.containsKey(2) && answers[2]!.isNotEmpty) {
-      int concernAnswer = answers[2]![0];
-      switch (concernAnswer) {
-        case 0: concernKey = 'acne'; break;
-        case 1: concernKey = 'pore'; break;
-        case 2: concernKey = 'antiaging'; break;
-        case 3: concernKey = 'sensitive'; break;
-        case 4: concernKey = 'antiaging'; break;
-      }
-    } else if (answers.containsKey(1) && answers[1]!.isNotEmpty) {
-      int skinFeelAnswer = answers[1]![0];
-      if (skinFeelAnswer == 0) {
-        concernKey = 'dry';
-      } else if (skinFeelAnswer == 2) {
-        concernKey = 'acne';
+    // Question 4: Sensitivity -> skin_type (overrides previous)
+    final sensitivityAnswer = answers[3]?.first;
+    if (sensitivityAnswer == 0 || sensitivityAnswer == 1) {
+      userSkinType = 'sensitive';
+    }
+
+    // Question 3: Skin Worries -> concerns
+    final List<String> userConcerns = [];
+    final concernAnswers = answers[2];
+    if (concernAnswers != null) {
+      for (var answer in concernAnswers) {
+        switch (answer) {
+          case 0:
+            userConcerns.add('acne');
+            break;
+          case 1:
+            userConcerns.add('pores');
+            break;
+          case 2:
+            userConcerns.add('wrinkles');
+            break;
+          case 3:
+            userConcerns.add('redness');
+            break;
+          case 4:
+            userConcerns.add('dullness');
+            break;
+        }
       }
     }
 
     if (kDebugMode) {
-      print("Determined concernKey: $concernKey");
+      print("User Profile - Skin Type: $userSkinType, Concerns: $userConcerns");
     }
 
-    String storeKey = 'coupang';
-    if (answers.containsKey(0) && answers[0]!.isNotEmpty && answers[0]![0] == 1) {
-      storeKey = 'amazon';
-    }
+    // --- Filter Products ---
+    final List<Product> recommendedProducts = allProducts.where((product) {
+      final productAttributes = product.attributes;
+      bool skinTypeMatch = false;
+      bool concernMatch = false;
+
+      // Check for skin type match
+      if (userSkinType == null) {
+        skinTypeMatch = true; // If user is unsure, don't filter by skin type
+      } else {
+        final productSkinTypes = productAttributes['skin_type'] as List<dynamic>?;
+        if (productSkinTypes != null &&
+            (productSkinTypes.contains(userSkinType) ||
+                productSkinTypes.contains('all'))) {
+          skinTypeMatch = true;
+        }
+      }
+
+      // Check for concern match
+      if (userConcerns.isEmpty) {
+        concernMatch = true; // If user has no concerns, don't filter by them
+      } else {
+        final productConcerns = productAttributes['concerns'] as List<dynamic>?;
+        if (productConcerns != null) {
+          for (var concern in userConcerns) {
+            if (productConcerns.contains(concern)) {
+              concernMatch = true;
+              break; // Found at least one match
+            }
+          }
+        }
+      }
+
+      return skinTypeMatch && concernMatch;
+    }).toList();
 
     if (kDebugMode) {
-      print("Determined storeKey: $storeKey");
+      print("Found ${recommendedProducts.length} matching products.");
+      print("--- New Recommendation Service End ---");
     }
 
-    final List<dynamic> recommendedProductsList = skinTypesData[concernKey]?[storeKey] ?? [];
-
-    if (kDebugMode) {
-      print("Found ${recommendedProductsList.length} products from JSON.");
-    }
-
-    if (recommendedProductsList.isNotEmpty) {
-      final products = recommendedProductsList.map((json) => Product.fromJson(json)).toList();
-      if (kDebugMode) {
-        print("Successfully parsed products. Returning ${products.length} products.");
-        print("--- Recommendation Service End ---");
-      }
-      return products;
-    } else {
-      if (kDebugMode) {
-        print("No products found. Returning empty list.");
-        print("--- Recommendation Service End ---");
-      }
-      return [];
-    }
+    return recommendedProducts;
   }
 }
