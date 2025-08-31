@@ -117,16 +117,45 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         SliverToBoxAdapter(
-          child: SizedBox(
-            height: 450,
-            child: PageView.builder(
-              controller: _pageController, // Use the stateful controller
-              itemCount: _recommendedProducts.length,
-              itemBuilder: (context, index) {
-                final product = _recommendedProducts[index];
-                return ProductCard(product: product);
-              },
-            ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 450,
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: _recommendedProducts.length,
+                  itemBuilder: (context, index) {
+                    final product = _recommendedProducts[index];
+                    return ProductCard(product: product);
+                  },
+                ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      _pageController.previousPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 24),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios),
+                    onPressed: () {
+                      _pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
         SliverToBoxAdapter(
