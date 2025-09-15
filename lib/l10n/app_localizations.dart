@@ -397,6 +397,312 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No, not at all'**
   String get notSensitive;
+
+  /// No description provided for @viewProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'View Product'**
+  String get viewProduct;
+
+  /// No description provided for @rec_1.
+  ///
+  /// In en, this message translates to:
+  /// **'Many reviews say it is effective for soothing the skin and replenishing moisture after washing.'**
+  String get rec_1;
+
+  /// No description provided for @rec_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Helps soothe and moisturize the skin, preferred as a nourishing serum.'**
+  String get rec_2;
+
+  /// No description provided for @rec_3.
+  ///
+  /// In en, this message translates to:
+  /// **'100-hour moisturizing effect, many reviews say it is good for soothing the skin and relieving redness.'**
+  String get rec_3;
+
+  /// No description provided for @rec_4.
+  ///
+  /// In en, this message translates to:
+  /// **'Less irritation to sensitive skin and helps form a protective barrier on the skin.'**
+  String get rec_4;
+
+  /// No description provided for @rec_5.
+  ///
+  /// In en, this message translates to:
+  /// **'Effective for skin soothing and regeneration, suitable for sensitive skin.'**
+  String get rec_5;
+
+  /// No description provided for @rec_6.
+  ///
+  /// In en, this message translates to:
+  /// **'Light yet deeply moisturizing, recommended for daily moisturizing.'**
+  String get rec_6;
+
+  /// No description provided for @rec_7.
+  ///
+  /// In en, this message translates to:
+  /// **'Lightweight and provides good hydration to the skin.'**
+  String get rec_7;
+
+  /// No description provided for @rec_8.
+  ///
+  /// In en, this message translates to:
+  /// **'Known as a highly moisturizing cream.'**
+  String get rec_8;
+
+  /// No description provided for @rec_9.
+  ///
+  /// In en, this message translates to:
+  /// **'Water gel type, popular for dry skin due to its refreshing feel.'**
+  String get rec_9;
+
+  /// No description provided for @rec_10.
+  ///
+  /// In en, this message translates to:
+  /// **'Hypoallergenic, suitable for sensitive skin.'**
+  String get rec_10;
+
+  /// No description provided for @rec_11.
+  ///
+  /// In en, this message translates to:
+  /// **'Effective for strengthening the skin barrier and moisturizing.'**
+  String get rec_11;
+
+  /// No description provided for @rec_12.
+  ///
+  /// In en, this message translates to:
+  /// **'Hypoallergenic, widely used for calming troubled skin.'**
+  String get rec_12;
+
+  /// No description provided for @rec_13.
+  ///
+  /// In en, this message translates to:
+  /// **'An ampoule for trouble relief and soothing.'**
+  String get rec_13;
+
+  /// No description provided for @rec_14.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent soothing effect with tea tree ingredients.'**
+  String get rec_14;
+
+  /// No description provided for @rec_15.
+  ///
+  /// In en, this message translates to:
+  /// **'A toner for troubled skin.'**
+  String get rec_15;
+
+  /// No description provided for @rec_16.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular as a cleanser for acne-prone skin.'**
+  String get rec_16;
+
+  /// No description provided for @rec_17.
+  ///
+  /// In en, this message translates to:
+  /// **'A treatment patch to apply on troubled areas.'**
+  String get rec_17;
+
+  /// No description provided for @rec_18.
+  ///
+  /// In en, this message translates to:
+  /// **'Helps with exfoliation and pore care.'**
+  String get rec_18;
+
+  /// No description provided for @rec_19.
+  ///
+  /// In en, this message translates to:
+  /// **'Well-known as an acne patch.'**
+  String get rec_19;
+
+  /// No description provided for @rec_20.
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle, hypoallergenic cleanser for acne.'**
+  String get rec_20;
+
+  /// No description provided for @rec_21.
+  ///
+  /// In en, this message translates to:
+  /// **'For sensitive skin, with less irritation.'**
+  String get rec_21;
+
+  /// No description provided for @rec_22.
+  ///
+  /// In en, this message translates to:
+  /// **'A cleanser suitable for sensitive skin.'**
+  String get rec_22;
+
+  /// No description provided for @rec_23.
+  ///
+  /// In en, this message translates to:
+  /// **'Soothing and moisturizing effects.'**
+  String get rec_23;
+
+  /// No description provided for @rec_24.
+  ///
+  /// In en, this message translates to:
+  /// **'Hypoallergenic, helps maintain skin moisture.'**
+  String get rec_24;
+
+  /// No description provided for @rec_25.
+  ///
+  /// In en, this message translates to:
+  /// **'A balm for soothing the skin.'**
+  String get rec_25;
+
+  /// No description provided for @rec_26.
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle, hypoallergenic moisturizing cream.'**
+  String get rec_26;
+
+  /// No description provided for @rec_27.
+  ///
+  /// In en, this message translates to:
+  /// **'Effective for skin regeneration and soothing.'**
+  String get rec_27;
+
+  /// No description provided for @rec_28.
+  ///
+  /// In en, this message translates to:
+  /// **'A gentle, hypoallergenic cleanser.'**
+  String get rec_28;
+
+  /// No description provided for @rec_29.
+  ///
+  /// In en, this message translates to:
+  /// **'A highly moisturizing cream for sensitive skin.'**
+  String get rec_29;
+
+  /// No description provided for @rec_30.
+  ///
+  /// In en, this message translates to:
+  /// **'Famous as a cleansing water.'**
+  String get rec_30;
+
+  /// No description provided for @rec_31.
+  ///
+  /// In en, this message translates to:
+  /// **'Helps with pore management and trouble relief.'**
+  String get rec_31;
+
+  /// No description provided for @rec_32.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular for exfoliating and improving wrinkles.'**
+  String get rec_32;
+
+  /// No description provided for @rec_33.
+  ///
+  /// In en, this message translates to:
+  /// **'For gentle exfoliation.'**
+  String get rec_33;
+
+  /// No description provided for @rec_34.
+  ///
+  /// In en, this message translates to:
+  /// **'Provides moisture and pore care.'**
+  String get rec_34;
+
+  /// No description provided for @rec_35.
+  ///
+  /// In en, this message translates to:
+  /// **'Pore cleansing effect.'**
+  String get rec_35;
+
+  /// No description provided for @rec_36.
+  ///
+  /// In en, this message translates to:
+  /// **'A set for elasticity and pore management.'**
+  String get rec_36;
+
+  /// No description provided for @rec_37.
+  ///
+  /// In en, this message translates to:
+  /// **'Globally popular for exfoliation and pore care.'**
+  String get rec_37;
+
+  /// No description provided for @rec_38.
+  ///
+  /// In en, this message translates to:
+  /// **'Exfoliates and improves skin radiance.'**
+  String get rec_38;
+
+  /// No description provided for @rec_39.
+  ///
+  /// In en, this message translates to:
+  /// **'Exfoliation and soothing.'**
+  String get rec_39;
+
+  /// No description provided for @rec_40.
+  ///
+  /// In en, this message translates to:
+  /// **'Whitening and wrinkle improvement effects.'**
+  String get rec_40;
+
+  /// No description provided for @rec_41.
+  ///
+  /// In en, this message translates to:
+  /// **'A variety of anti-aging products.'**
+  String get rec_41;
+
+  /// No description provided for @rec_42.
+  ///
+  /// In en, this message translates to:
+  /// **'Improves elasticity and provides vitality to the skin.'**
+  String get rec_42;
+
+  /// No description provided for @rec_43.
+  ///
+  /// In en, this message translates to:
+  /// **'A cream for wrinkle improvement.'**
+  String get rec_43;
+
+  /// No description provided for @rec_44.
+  ///
+  /// In en, this message translates to:
+  /// **'A popular anti-aging ampoule.'**
+  String get rec_44;
+
+  /// No description provided for @rec_45.
+  ///
+  /// In en, this message translates to:
+  /// **'Contains retinol alternative ingredients to boost elasticity.'**
+  String get rec_45;
+
+  /// No description provided for @rec_46.
+  ///
+  /// In en, this message translates to:
+  /// **'A cream for wrinkle improvement.'**
+  String get rec_46;
+
+  /// No description provided for @rec_47.
+  ///
+  /// In en, this message translates to:
+  /// **'Supports skin elasticity with peptide ingredients.'**
+  String get rec_47;
+
+  /// No description provided for @rec_48.
+  ///
+  /// In en, this message translates to:
+  /// **'A powerful, intensive serum for wrinkle improvement.'**
+  String get rec_48;
+
+  /// No description provided for @noProductsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Unfortunately, there are no recommended products that match your criteria. Please try the quiz again.'**
+  String get noProductsFound;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
 }
 
 class _AppLocalizationsDelegate

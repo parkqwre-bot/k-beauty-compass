@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:k_beauty_compass/l10n/app_localizations.dart';
 import 'screens/onboarding_screen.dart'; // Import the onboarding screen
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   runApp(const KBeautyCompassApp());
 }
 

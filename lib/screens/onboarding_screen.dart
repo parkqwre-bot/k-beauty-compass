@@ -43,6 +43,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const QuizScreen()));
+            },
+            child: Text(
+              AppLocalizations.of(context)!.skip,
+              style: TextStyle(color: Colors.pink.shade300, fontSize: 16),
+            ),
+          ),
           PopupMenuButton<Locale>(
             icon: const Icon(Icons.language, color: Colors.black),
             onSelected: (Locale locale) {

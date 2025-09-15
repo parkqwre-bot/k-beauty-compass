@@ -158,4 +158,157 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get notSensitive => '아니요, 전혀 민감하지 않아요';
+
+  @override
+  String get viewProduct => '보러 가기';
+
+  @override
+  String get rec_1 => '세안 후 피부를 진정시키고 수분 보충에 효과적이라는 평이 많음.';
+
+  @override
+  String get rec_2 => '피부 진정과 보습에 도움, 영양 공급용 세럼으로 선호.';
+
+  @override
+  String get rec_3 => '100시간 보습 지속력, 피부 진정과 붉은기 완화에 좋다는 후기가 다수.';
+
+  @override
+  String get rec_4 => '민감한 피부에도 자극 적고 피부 보호막 형성에 도움.';
+
+  @override
+  String get rec_5 => '피부 진정 및 재생에 효과적, 민감성 피부 적합.';
+
+  @override
+  String get rec_6 => '가벼우면서도 깊은 보습력, 일상 보습용으로 추천.';
+
+  @override
+  String get rec_7 => '가벼우면서 피부에 수분 공급이 좋음.';
+
+  @override
+  String get rec_8 => '고보습 크림으로 알려짐.';
+
+  @override
+  String get rec_9 => '수분 젤 타입, 산뜻해 건성 피부에 인기.';
+
+  @override
+  String get rec_10 => '저자극, 민감 피부에 적합.';
+
+  @override
+  String get rec_11 => '피부 장벽 강화와 보습에 효과적.';
+
+  @override
+  String get rec_12 => '저자극, 트러블 진정용으로 많이 사용됨.';
+
+  @override
+  String get rec_13 => '트러블 완화와 진정을 위한 앰플.';
+
+  @override
+  String get rec_14 => '티트리 성분으로 진정 효과 우수.';
+
+  @override
+  String get rec_15 => '트러블성 피부를 위한 토너.';
+
+  @override
+  String get rec_16 => '여드름 피부용 클렌저로 인기.';
+
+  @override
+  String get rec_17 => '트러블 부위에 붙여 사용하는 치료 패치.';
+
+  @override
+  String get rec_18 => '각질 제거와 모공 관리에 도움.';
+
+  @override
+  String get rec_19 => '여드름 패치로 잘 알려짐.';
+
+  @override
+  String get rec_20 => '저자극 여드름 클렌저.';
+
+  @override
+  String get rec_21 => '민감 피부용, 자극이 적음.';
+
+  @override
+  String get rec_22 => '민감성 피부에 적합한 클렌저.';
+
+  @override
+  String get rec_23 => '진정과 보습 효과.';
+
+  @override
+  String get rec_24 => '저자극, 피부 보습 유지에 도움.';
+
+  @override
+  String get rec_25 => '피부 진정용 밤.';
+
+  @override
+  String get rec_26 => '저자극 보습 크림.';
+
+  @override
+  String get rec_27 => '피부 재생과 진정에 효과적.';
+
+  @override
+  String get rec_28 => '저자극 세정제.';
+
+  @override
+  String get rec_29 => '민감성 피부용 고보습 크림.';
+
+  @override
+  String get rec_30 => '클렌징워터로 유명.';
+
+  @override
+  String get rec_31 => '모공 관리와 트러블 완화에 도움.';
+
+  @override
+  String get rec_32 => '각질 정돈과 주름 개선에 인기';
+
+  @override
+  String get rec_33 => '부드러운 각질 제거용.';
+
+  @override
+  String get rec_34 => '수분 공급과 모공 케어.';
+
+  @override
+  String get rec_35 => '모공 청정 효과.';
+
+  @override
+  String get rec_36 => '탄력과 모공 관리용 세트.';
+
+  @override
+  String get rec_37 => '각질과 모공 관리에 세계적 인기.';
+
+  @override
+  String get rec_38 => '각질 제거 및 피부 광채 개선.';
+
+  @override
+  String get rec_39 => '각질 제거와 진정.';
+
+  @override
+  String get rec_40 => '미백과 주름 개선 효과.';
+
+  @override
+  String get rec_41 => '다양한 안티에이징 제품군.';
+
+  @override
+  String get rec_42 => '탄력 개선과 피부 활력 제공.';
+
+  @override
+  String get rec_43 => '주름 개선용 크림.';
+
+  @override
+  String get rec_44 => '안티에이징 인기 앰플.';
+
+  @override
+  String get rec_45 => '레티놀 대체 성분 포함 탄력 증진.';
+
+  @override
+  String get rec_46 => '주름 개선용 크림.';
+
+  @override
+  String get rec_47 => '펩타이드 성분으로 피부 탄력 지원.';
+
+  @override
+  String get rec_48 => '강력한 주름 개선 집중 세럼.';
+
+  @override
+  String get noProductsFound => '아쉽지만, 현재 조건에 맞는 추천 제품이 없습니다. 퀴즈를 다시 시도해보세요.';
+
+  @override
+  String get skip => '건너뛰기';
 }

@@ -169,4 +169,167 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notSensitive => 'No, not at all';
+
+  @override
+  String get viewProduct => 'View Product';
+
+  @override
+  String get rec_1 =>
+      'Many reviews say it is effective for soothing the skin and replenishing moisture after washing.';
+
+  @override
+  String get rec_2 =>
+      'Helps soothe and moisturize the skin, preferred as a nourishing serum.';
+
+  @override
+  String get rec_3 =>
+      '100-hour moisturizing effect, many reviews say it is good for soothing the skin and relieving redness.';
+
+  @override
+  String get rec_4 =>
+      'Less irritation to sensitive skin and helps form a protective barrier on the skin.';
+
+  @override
+  String get rec_5 =>
+      'Effective for skin soothing and regeneration, suitable for sensitive skin.';
+
+  @override
+  String get rec_6 =>
+      'Light yet deeply moisturizing, recommended for daily moisturizing.';
+
+  @override
+  String get rec_7 => 'Lightweight and provides good hydration to the skin.';
+
+  @override
+  String get rec_8 => 'Known as a highly moisturizing cream.';
+
+  @override
+  String get rec_9 =>
+      'Water gel type, popular for dry skin due to its refreshing feel.';
+
+  @override
+  String get rec_10 => 'Hypoallergenic, suitable for sensitive skin.';
+
+  @override
+  String get rec_11 =>
+      'Effective for strengthening the skin barrier and moisturizing.';
+
+  @override
+  String get rec_12 => 'Hypoallergenic, widely used for calming troubled skin.';
+
+  @override
+  String get rec_13 => 'An ampoule for trouble relief and soothing.';
+
+  @override
+  String get rec_14 => 'Excellent soothing effect with tea tree ingredients.';
+
+  @override
+  String get rec_15 => 'A toner for troubled skin.';
+
+  @override
+  String get rec_16 => 'Popular as a cleanser for acne-prone skin.';
+
+  @override
+  String get rec_17 => 'A treatment patch to apply on troubled areas.';
+
+  @override
+  String get rec_18 => 'Helps with exfoliation and pore care.';
+
+  @override
+  String get rec_19 => 'Well-known as an acne patch.';
+
+  @override
+  String get rec_20 => 'A gentle, hypoallergenic cleanser for acne.';
+
+  @override
+  String get rec_21 => 'For sensitive skin, with less irritation.';
+
+  @override
+  String get rec_22 => 'A cleanser suitable for sensitive skin.';
+
+  @override
+  String get rec_23 => 'Soothing and moisturizing effects.';
+
+  @override
+  String get rec_24 => 'Hypoallergenic, helps maintain skin moisture.';
+
+  @override
+  String get rec_25 => 'A balm for soothing the skin.';
+
+  @override
+  String get rec_26 => 'A gentle, hypoallergenic moisturizing cream.';
+
+  @override
+  String get rec_27 => 'Effective for skin regeneration and soothing.';
+
+  @override
+  String get rec_28 => 'A gentle, hypoallergenic cleanser.';
+
+  @override
+  String get rec_29 => 'A highly moisturizing cream for sensitive skin.';
+
+  @override
+  String get rec_30 => 'Famous as a cleansing water.';
+
+  @override
+  String get rec_31 => 'Helps with pore management and trouble relief.';
+
+  @override
+  String get rec_32 => 'Popular for exfoliating and improving wrinkles.';
+
+  @override
+  String get rec_33 => 'For gentle exfoliation.';
+
+  @override
+  String get rec_34 => 'Provides moisture and pore care.';
+
+  @override
+  String get rec_35 => 'Pore cleansing effect.';
+
+  @override
+  String get rec_36 => 'A set for elasticity and pore management.';
+
+  @override
+  String get rec_37 => 'Globally popular for exfoliation and pore care.';
+
+  @override
+  String get rec_38 => 'Exfoliates and improves skin radiance.';
+
+  @override
+  String get rec_39 => 'Exfoliation and soothing.';
+
+  @override
+  String get rec_40 => 'Whitening and wrinkle improvement effects.';
+
+  @override
+  String get rec_41 => 'A variety of anti-aging products.';
+
+  @override
+  String get rec_42 => 'Improves elasticity and provides vitality to the skin.';
+
+  @override
+  String get rec_43 => 'A cream for wrinkle improvement.';
+
+  @override
+  String get rec_44 => 'A popular anti-aging ampoule.';
+
+  @override
+  String get rec_45 =>
+      'Contains retinol alternative ingredients to boost elasticity.';
+
+  @override
+  String get rec_46 => 'A cream for wrinkle improvement.';
+
+  @override
+  String get rec_47 => 'Supports skin elasticity with peptide ingredients.';
+
+  @override
+  String get rec_48 => 'A powerful, intensive serum for wrinkle improvement.';
+
+  @override
+  String get noProductsFound =>
+      'Unfortunately, there are no recommended products that match your criteria. Please try the quiz again.';
+
+  @override
+  String get skip => 'Skip';
 }

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:k_beauty_compass/l10n/app_localizations.dart';
+import 'package:k_beauty_compass/l10n/l10n.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/product_model.dart';
 import '../services/recommendation_service.dart';
+import 'package:k_beauty_compass/widgets/banner_ad_widget.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class DashboardScreen extends StatefulWidget {
   final Map<int, List<int>> quizAnswers;
@@ -35,8 +38,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Future<void> _initializeRecommendations() async {
     try {
-      _recommendedProducts =
-          await _recommendationService.getRecommendations(widget.quizAnswers);
+      final bool isUS = widget.quizAnswers[0]?.first == 1;
+      _recommendedProducts = await _recommendationService.getRecommendations(
+          widget.quizAnswers,
+          isUS: isUS);
     } catch (e, stacktrace) {
       print('Error loading recommendations: $e');
       print(stacktrace);
@@ -112,97 +117,111 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     final bool isUS = widget.quizAnswers[0]?.first == 1;
 
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          backgroundColor: Colors.white,
-          pinned: true,
-          expandedHeight: 120.0,
-          flexibleSpace: FlexibleSpaceBar(
-            titlePadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            title: Text(
-              AppLocalizations.of(context)!.todaysBeautyCompass,
-              style:
-                  const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-            ),
-            background: Container(color: Colors.white),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.yourPersonalizedRoutine,
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 10),
-                if (_recommendedProducts.isEmpty)
-                  const Text("아쉽지만, 현재 조건에 맞는 추천 제품이 없습니다. 퀴즈를 다시 시도해보세요."),
-              ],
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 450,
-                child: PageView.builder(
-                  controller: _pageController,
-                  itemCount: _recommendedProducts.length,
-                  itemBuilder: (context, index) {
-                    final product = _recommendedProducts[index];
-                    return ProductCard(product: product, isUS: isUS);
-                  },
+    return Column(
+      children: [
+        Expanded(
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                backgroundColor: Colors.white,
+                pinned: true,
+                expandedHeight: 120.0,
+                flexibleSpace: FlexibleSpaceBar(
+                  titlePadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  title: Text(
+                    AppLocalizations.of(context)!.todaysBeautyCompass,
+                    style: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                  ),
+                  background: Container(color: Colors.white),
                 ),
               ),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      _pageController.previousPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    },
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.yourPersonalizedRoutine,
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 10),
+                      if (_recommendedProducts.isEmpty)
+                        Text(AppLocalizations.of(context)!.noProductsFound),
+                    ],
                   ),
-                  const SizedBox(width: 24),
-                  IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios),
-                    onPressed: () {
-                      _pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    },
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 450,
+                      child: PageView.builder(
+                        controller: _pageController,
+                        itemCount: _recommendedProducts.length,
+                        itemBuilder: (context, index) {
+                          final product = _recommendedProducts[index];
+                          return AnimationConfiguration.staggeredList(
+                            position: index,
+                            duration: const Duration(milliseconds: 375),
+                            child: FadeInAnimation(
+                              child: ProductCard(product: product, isUS: isUS),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios),
+                          onPressed: () {
+                            _pageController.previousPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                        ),
+                        const SizedBox(width: 24),
+                        IconButton(
+                          icon: const Icon(Icons.arrow_forward_ios),
+                          onPressed: () {
+                            _pageController.nextPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  child: TextButton(
+                    onPressed: () => _showLegalDisclaimer(context),
+                    child: Text(
+                      AppLocalizations.of(context)!.legalDisclaimer,
+                      style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                          decoration: TextDecoration.underline),
+                    ),
                   ),
-                ],
+                ),
               ),
             ],
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: TextButton(
-              onPressed: () => _showLegalDisclaimer(context),
-              child: Text(
-                AppLocalizations.of(context)!.legalDisclaimer,
-                style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                    decoration: TextDecoration.underline),
-              ),
-            ),
-          ),
-        ),
+        const BannerAdWidget(),
       ],
     );
   }
@@ -285,7 +304,7 @@ class ProductCard extends StatelessWidget {
               flex: 3,
               child: SingleChildScrollView(
                 child: Text(
-                  product.recommendation,
+                  getRecommendation(context, product.recommendationKey),
                   style: const TextStyle(fontSize: 14, color: Colors.black54),
                 ),
               ),
@@ -302,9 +321,9 @@ class ProductCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text(
-                  "보러 가기", // TODO: Localize this string
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.viewProduct,
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),

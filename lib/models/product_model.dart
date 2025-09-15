@@ -4,7 +4,7 @@ class Product {
   final String imageUrl;
   final String affiliateUrlCoupang;
   final String affiliateUrlAmazon;
-  final String recommendation;
+  final String recommendationKey;
   final Map<String, dynamic> attributes;
 
   Product({
@@ -13,7 +13,7 @@ class Product {
     required this.imageUrl,
     required this.affiliateUrlCoupang,
     required this.affiliateUrlAmazon,
-    required this.recommendation,
+    required this.recommendationKey,
     required this.attributes,
   });
 
@@ -24,7 +24,7 @@ class Product {
       imageUrl: json['imageUrl'],
       affiliateUrlCoupang: json['affiliateUrlCoupang'],
       affiliateUrlAmazon: json['affiliateUrlAmazon'],
-      recommendation: json['recommendation'],
+      recommendationKey: json['recommendationKey'],
       attributes: json['attributes'],
     );
   }

@@ -124,32 +124,52 @@ class _QuizScreenState extends State<QuizScreen> {
               color: Colors.pink.shade300,
             ),
             const SizedBox(height: 40),
-            Text(
-              currentQuestion.questionText,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
             Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: currentQuestion.options.length,
-                itemBuilder: (context, index) {
-                  final isSelected = _selectedAnswers[_currentQuestionIndex]?.contains(index) ?? false;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
-                    child: OutlinedButton(
-                      onPressed: () => _onOptionSelected(index, currentQuestion),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.all(16),
-                        backgroundColor: isSelected ? Colors.pink.shade50 : Colors.white,
-                        side: BorderSide(color: isSelected ? Colors.pink.shade300 : Colors.grey.shade300, width: 1.5),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                      child: Text(currentQuestion.options[index], style: const TextStyle(fontSize: 16, color: Colors.black87)),
-                    ),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(1.0, 0.0),
+                      end: Offset.zero,
+                    ).animate(animation),
+                    child: child,
                   );
                 },
+                child: Column(
+                  key: ValueKey<int>(_currentQuestionIndex), // Key is crucial for AnimatedSwitcher
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      currentQuestion.questionText,
+                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 30),
+                    Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: currentQuestion.options.length,
+                        itemBuilder: (context, index) {
+                          final isSelected = _selectedAnswers[_currentQuestionIndex]?.contains(index) ?? false;
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 12.0),
+                            child: OutlinedButton(
+                              onPressed: () => _onOptionSelected(index, currentQuestion),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.all(16),
+                                backgroundColor: isSelected ? Colors.pink.shade50 : Colors.white,
+                                side: BorderSide(color: isSelected ? Colors.pink.shade300 : Colors.grey.shade300, width: 1.5),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              ),
+                              child: Text(currentQuestion.options[index], style: const TextStyle(fontSize: 16, color: Colors.black87)),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 20),
